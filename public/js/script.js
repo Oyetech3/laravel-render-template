@@ -23,15 +23,6 @@ closeMenu.addEventListener("click", () => {
 })
 
 
-//bullets slide
-bullets.forEach((bullet,index) => {
-  bullet.addEventListener("click", () => {
-    currentIndex = index
-    updateSlide()
-  })
-})
-
-
 //categories dropdown
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('firstbtn').addEventListener('click', function () {
@@ -57,6 +48,7 @@ document.addEventListener('DOMContentLoaded',function() {
     })
 
 })
+
 
 
 

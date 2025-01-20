@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,14 @@ Route::middleware([
 route::get('/redirect', [HomeController::class, 'redirect']);
 route::get('/', [HomeController::class, 'index']);
 route::get('/collections', [HomeController::class, 'collections']);
+
+
+route::get('/admindashboard', [AdminController::class, 'admindashboard']);
+route::get('/collection', [AdminController::class, 'collection']);
+route::post('/add_collection', [AdminController::class, 'add_collection']);
+route::get('/cards', [AdminController::class, 'cards']);
+route::get('/charts', [AdminController::class, 'charts']);
+route::get('/tables', [AdminController::class, 'tables']);
+route::get('/add_product', [AdminController::class, 'add_product']);
+route::get('/view_products', [AdminController::class, 'view_products']);
+route::get('/delete_collection/{id}', [AdminController::class, 'delete_collection']);
