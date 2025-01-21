@@ -148,7 +148,7 @@ class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-
           <li
             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
           >
-            <a class="w-full" href="{{url('/add_product')}}">Add Products</a>
+            <a class="w-full" href="{{url('/add_products')}}">Add Products</a>
           </li>
           <li
             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -392,12 +392,12 @@ x-transition:leave-end="opacity-0 transform -translate-x-20"
           <li
             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
           >
-            <a class="w-full" href="{{url('')}}">Add Products</a>
+            <a class="w-full" href="{{url('/add_products')}}">Add Products</a>
           </li>
           <li
             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
           >
-            <a class="w-full" href="{{url('')}}">
+            <a class="w-full" href="{{url('/view_products')}}">
               View Products
             </a>
           </li>

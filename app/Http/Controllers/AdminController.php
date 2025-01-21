@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     //
     public function admindashboard() {
-        return view('admin.index');
+        if(Auth::id()) {
+            return view('admin.index');
+        }
+        else {
+            return view('home.userpage');
+        }
+
     }
 
     public function collection() {
@@ -61,6 +69,92 @@ class AdminController extends Controller
         $collection->delete();
 
         return redirect()->back()->with('message', 'Collection deleted successfully');
+    }
+
+    public function add_products() {
+        $collections = Collection::all();
+
+        return view('admin.add_products', compact('collections'));
+    }
+
+    public function add_product(Request $request) {
+        $product = new Product();
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->collection = $request->collection;
+        $product->naira_price = $request->naira_price;
+        $product->naira_discount = $request->naira_discount;
+        $product->dollar_price = $request->dollar_price;
+        $product->dollar_discount = $request->dollar_discount;
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $image = $request->file('image');
+        $imagename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imagename);
+
+        $product->image = $imagename;
+
+        $product->save();
+
+        return redirect()->back()->with(
+            'message', "Product had been added successfully"
+        );
+    }
+
+    public function view_products() {
+        $products = Product::all();
+        return view('admin.view_products', compact('products'));
+    }
+
+    public function delete_product($id) {
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->back()->with(
+            'message', 'Product deleted successfully'
+        );
+    }
+
+    public function edit_product($id) {
+        $product = Product::find($id);
+        $collections = Collection::all();
+
+        return view('admin.edit_product', compact('product','collections'));
+    }
+
+    public function confirm_edit(Request $request, $id) {
+        $product = Product::find($id);
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->collection = $request->collection;
+        $product->naira_price = $request->naira_price;
+        $product->naira_discount = $request->naira_discount;
+        $product->dollar_price = $request->dollar_price;
+        $product->dollar_discount = $request->dollar_discount;
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $image = $request->file('image');
+
+        if($image) {
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imagename);
+            $product->image = $imagename;
+        }
+
+        $product->save();
+
+        return redirect()->back()->with(
+            'message', 'Product Updated Successfully'
+        );
+
     }
 
     public function cards() {

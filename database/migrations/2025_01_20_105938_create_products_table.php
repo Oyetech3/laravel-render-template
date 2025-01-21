@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('collection')->nullable();
+            $table->string('quantity')->default(1);
+            $table->string('image')->nullable();
+            $table->string('naira_price')->nullable();
+            $table->string('naira_discount')->nullable();
+            $table->string('dollar_price')->nullable();
+            $table->string('dollar_discount')->nullable();
+
             $table->timestamps();
         });
     }
