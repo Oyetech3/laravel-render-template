@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collections</title>
+    <title>Products</title>
     <link rel="icon" href="./images/logocopy.png">
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -73,7 +73,7 @@
                       <td class="px-4 py-3">${{$products->dollar_price}}</td>
                       <td class="px-4 py-3">${{$products->dollar_discount}}</td>
                       <td class="px-4 py-3">
-                        <img class="size-20 rounded-lg shadow-md" src="/images/{{$products->image}}" />
+                        <img class="size-16 rounded-lg shadow-md" src="/images/{{$products->image}}" />
                       </td>
                       <td class="px-4 py-3">
                         <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_product', $products->id)}}" class="bg-secondary-9 hover:bg-gray-700 text-white rounded-md px-3.5 py-2">Delete</a>

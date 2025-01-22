@@ -76,12 +76,20 @@
                         @endforeach
                     </select>
                 </div>
+                <div class=" gap-1 mb-2">
+                    <label>Choose detail info:</label><br>
+                    <select class="mt-1" name="other" class="shadow-md rounded-md border-0" >
+
+                        <option value="New Arrival">New Arrival</option>
+                        <option value="Trending Products">Trending Products</option>
+                    </select>
+                </div>
                 <div class="grid gap-1 mb-2">
                     <label>Product Image:</label>
                     <input name="image" class="w-fit text-sm shadow-sm rounded-md border-0" type="file"  />
                 </div>
 
-                <input class="mt-5 bg-secondary-9 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-700" type="submit" value="Add Collection" />
+                <input class="mt-5 bg-secondary-9 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-700" type="submit" value="Add Product" />
             </form>
           </div>
 

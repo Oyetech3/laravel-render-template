@@ -21,6 +21,8 @@ Route::middleware([
 route::get('/redirect', [HomeController::class, 'redirect']);
 route::get('/', [HomeController::class, 'index']);
 route::get('/collections', [HomeController::class, 'collections']);
+route::post('/liked_product/{id}', [HomeController::class, 'liked_product']);
+route::post('/add_to_cart/{id}', [HomeController::class, 'add_to_cart']);
 
 
 route::get('/admindashboard', [AdminController::class, 'admindashboard']);
@@ -36,3 +38,4 @@ route::get('/delete_collection/{id}', [AdminController::class, 'delete_collectio
 route::get('/delete_product/{id}',[AdminController::class, 'delete_product']);
 route::get('/edit_product/{id}', [AdminController::class, 'edit_product']);
 route::post('/confirm_edit/{id}', [AdminController::class, 'confirm_edit']);
+

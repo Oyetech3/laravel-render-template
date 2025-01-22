@@ -17,212 +17,82 @@
             </svg>
             All Collections
         </li>
-        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Option 2</li>
-        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Option 3</li>
+        @foreach ($collections as $item)
+        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">{{$item->collection_name}}</li>
+        @endforeach
         </ul>
 
 </div>
 <!--Categories end-->
 
-<h1 class="heads mt-7">Trending Products</h1>
+<h1 class="heads mt-7">New Arrivals</h1>
+<div class="w-20 h-1 m-auto mt-4 bg-secondary-10"></div>
 
 <div id="arrivals" class="grid grid-cols-1 vvs:grid-cols-2 mm:grid-cols-3 lg:grid-cols-4 place-items-center gap-10 w-full  px-6 py-12 pb-6">
     <!--each prodcut-->
 
+    @foreach ($new_products as $item)
+
     <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka1.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
+        <img class="proimg" src="./images/{{$item->image}}" alt="">
+        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
+            <p class="line-through text-gray-400 text-sm">#{{$item->naira_price}}</p>
+            <p class="text-pink-600 text-lg">#{{$item->naira_discount}}</p>
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
+
+            <form action="" method="POST" class="w-10 bg-transparent">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <form action="" method="POST" class="bg-transparent w-full ">
+                @csrf
+                <input type="hidden" name="" value="" >
+                <button type="submit" class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+                    <p>Add to cart</p>
+                </button>
+            </form>
+
         </div>
     </a>
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka2.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
+    @endforeach
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka3.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka4.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka5.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka6.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka1.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka2.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
 
 </div>
 
 <!--button-->
-<div class="flex items-center gap-2 justify-center  ">
-    <div class="but" id="back">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-        </svg>
-    </div>
-    <div class="but" id="next">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-    </div>
+<div class="pt-4 flex justify-center items-center space-x-2">
+    @foreach ($new_products->links()->elements[0] as $page => $url)
+        @if ($page == $new_products->currentPage())
+            <span
+                class="px-4 py-2 bg-secondary-9 text-white rounded-md shadow-md cursor-default">
+                {{ $page }}
+            </span>
+        @else
+            <a
+                href="{{ $url }}"
+                class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900 transition-colors duration-300 shadow-md">
+                {{ $page }}
+            </a>
+        @endif
+    @endforeach
 </div>
+
 <!--button end-->
 
-<!--View Products-->
-<a href="" class="block text-center p-2 shadow-md rounded-md bg-secondary-9 w-fit m-auto mt-4 hover:bg-gray-800 hover:scale-105 transition duration-300">
-    <p class="text-white font-semibold">View All Products</p>
-</a>
+
 
 </div>
 <!--New Arrivals end-->
@@ -230,204 +100,78 @@
 <!--Trending Products-->
 <div class="my-14">
 <h1 class="heads">Trending Products</h1>
+<div class="w-20 h-1 m-auto mt-4 bg-secondary-10"></div>
+
 <div id="arrivals" class="grid grid-cols-1 vvs:grid-cols-2 mm:grid-cols-3 lg:grid-cols-4 place-items-center gap-10 w-full  px-6 py-12 pb-6">
 
+    @if(session()->has('message'))
+            <div class="bg-green-100 mt-2 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{session()->get('message')}}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close">
+                    <span class="text-green-700 hover:text-green-900">&times;</span>
+                </button>
+            </div>
+    @endif
     <!--each prodcut-->
 
+    @foreach ($trending_products as $item)
+
     <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava1.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
+        <img class="proimg" src="./images/{{$item->image}}" alt="">
+        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
+            <p class="line-through text-gray-400 text-sm">#{{$item->naira_price}}</p>
+            <p class="text-pink-600 text-lg">#{{$item->naira_discount}}</p>
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
+
+            <form action="{{url('/liked_product', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <form action="" method="POST" class="bg-transparent w-full ">
+                @csrf
+                <input type="hidden" name="product_id" value="{{$item->id}}" >
+                <button type="submit" class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+                    <p>Add to cart</p>
+                </button>
+            </form>
+
         </div>
     </a>
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava2.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
+    @endforeach
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava3.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava5.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
 
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka1.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/albarka2.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava4.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
-    <a class="proanchor" href="">
-        <img class="proimg" src="./images/ava6.JPG" alt="">
-        <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">Albarkah Tassel Bag</p>
-        <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#27000</p>
-            <p class="text-pink-600 text-lg">#24000</p>
-        </div>
-        <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
-            <div class=" w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 stroke-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-            </div>
-            <div class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
-                <p>Add to cart</p>
-            </div>
-        </div>
-    </a>
 
 </div>
 
 <!--button-->
-<div class="flex items-center gap-2 justify-center  ">
-    <div class="but" id="back">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-        </svg>
-    </div>
-    <div class="but" id="next">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-    </div>
+<div class="pt-4 flex justify-center items-center space-x-2">
+    @foreach ($trending_products->links()->elements[0] as $page => $url)
+        @if ($page == $trending_products->currentPage())
+            <span
+                class="px-4 py-2 bg-secondary-9 text-white rounded-md shadow-md cursor-default">
+                {{ $page }}
+            </span>
+        @else
+            <a
+                href="{{ $url }}"
+                class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900 transition-colors duration-300 shadow-md">
+                {{ $page }}
+            </a>
+        @endif
+    @endforeach
 </div>
+
 <!--button end-->
-
-<!--View Products-->
-<a href="" class="block text-center p-2 shadow-md rounded-md bg-secondary-9 w-fit m-auto mt-4 hover:bg-gray-800 hover:scale-105 transition duration-300">
-    <p class="text-white font-semibold">View All Products</p>
-</a>
-
 </div>

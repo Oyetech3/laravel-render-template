@@ -14,7 +14,7 @@
             </div>
             <ul class="flex w-mini flex-col py-5 px-10 gap-5 mm:flex-row mm:px-0 mm:justify-between ">
                 <li class="links"><a href="{{url('/')}}">Home</a></li>
-                <li class="links"><a href="">Products</a></li>
+                <li class="links"><a href="{{url('/userproducts')}}">Products</a></li>
                 <li class="links"><a href="">Services</a></li>
                 <li class="links"><a href="">Contact</a></li>
             </ul>

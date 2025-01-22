@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collections</title>
+    <title>Products</title>
     <base href="/public">
     <link rel="icon" href="./images/logocopy.png">
     <link
@@ -71,6 +71,15 @@
                       <label>Dollar Discount:</label>
                       <input name="dollar_discount" value="{{$product->dollar_discount}}" class="w-1/5 text-sm placeholder:text-gray-400 shadow-md rounded-md border-0" type="text" placeholder="$" />
                   </div>
+                  <div class=" gap-1 mb-2">
+                    <label>Change detail info:</label><br>
+                    <select class="mt-1" name="other" class="shadow-md rounded-md border-0" >
+
+                        <option value="{{$product->other}}">{{$product->other}}</option>
+                        <option value="Trending Products">New Arrival</option>
+                        <option value="Trending Products">Trending Products</option>
+                    </select>
+                </div>
                   <div class=" gap-1 mb-2">
                       <label>Choose Collection:</label><br>
                       <select class="mt-1" name="collection" class="shadow-md rounded-md border-0" >

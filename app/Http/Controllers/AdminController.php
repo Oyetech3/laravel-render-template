@@ -87,6 +87,7 @@ class AdminController extends Controller
         $product->naira_discount = $request->naira_discount;
         $product->dollar_price = $request->dollar_price;
         $product->dollar_discount = $request->dollar_discount;
+        $product->other = $request->other;
 
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -136,6 +137,7 @@ class AdminController extends Controller
         $product->naira_discount = $request->naira_discount;
         $product->dollar_price = $request->dollar_price;
         $product->dollar_discount = $request->dollar_discount;
+        $product->other = $request->other;
 
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
