@@ -1,16 +1,10 @@
-
-const slider = document.getElementById("slider")
-const sliderContent = document.getElementById("slidercontent")
-const sliderWidth = slider.offsetWidth
-const bullets = document.querySelectorAll(".bullets")
 const next = document.getElementById("next")
 const back = document.getElementById("back")
-const arrival = document.getElementById("arrivals")
-const scrollAmount = arrival.offsetWidth / 4
 const nav = document.getElementById("nav")
 const menu = document.getElementById("menu")
 const closeMenu = document.getElementById("close")
 
+console.log("JS is working")
 
 //toggle menu
 menu.addEventListener("click", () => {

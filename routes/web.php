@@ -21,8 +21,13 @@ Route::middleware([
 route::get('/redirect', [HomeController::class, 'redirect']);
 route::get('/', [HomeController::class, 'index']);
 route::get('/collections', [HomeController::class, 'collections']);
-route::post('/liked_product/{id}', [HomeController::class, 'liked_product']);
+Route::post('/liked_product/{id}', [HomeController::class, 'liked_product'])->name('liked_product');
 route::post('/add_to_cart/{id}', [HomeController::class, 'add_to_cart']);
+route::get('/liked', [HomeController::class, 'liked']);
+route::get('/carts', [HomeController::class, 'carts']);
+route::get('/products', [HomeController::class, 'products']);
+route::post('/update_quantity/{id}', [HomeController::class, 'update_quantity']);
+route::get('/delete_cart/{id}', [HomeController::class, 'delete_cart']);
 
 
 route::get('/admindashboard', [AdminController::class, 'admindashboard']);

@@ -1,3 +1,12 @@
+@if(session()->has('message'))
+            <div class="bg-green-100 mt-2 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{session()->get('message')}}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close">
+                    <span class="text-green-700 hover:text-green-900">&times;</span>
+                </button>
+            </div>
+    @endif
+
 <div class="my-10 ">
     <!--Categories-->
     <div class="relative inline-block ss:hidden mx-2 sss:mx-5">
@@ -22,13 +31,14 @@
         @endforeach
         </ul>
 
-</div>
+    </div>
 <!--Categories end-->
 
-<h1 class="heads mt-7">New Arrivals</h1>
-<div class="w-20 h-1 m-auto mt-4 bg-secondary-10"></div>
+    <h1 class="heads mt-7">New Arrivals</h1>
+    <div class="w-20 h-1 m-auto mt-4 bg-secondary-10"></div>
 
 <div id="arrivals" class="grid grid-cols-1 vvs:grid-cols-2 mm:grid-cols-3 lg:grid-cols-4 place-items-center gap-10 w-full  px-6 py-12 pb-6">
+
     <!--each prodcut-->
 
     @foreach ($new_products as $item)
@@ -42,7 +52,7 @@
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
 
-            <form action="" method="POST" class="w-10 bg-transparent">
+            <form action="{{url('/liked_product', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $item->id }}">
                 <button type="submit">
@@ -52,9 +62,9 @@
                 </button>
             </form>
 
-            <form action="" method="POST" class="bg-transparent w-full ">
+            <form action="{{url('/add_to_cart', $item->id)}}" method="POST" class="bg-transparent w-full ">
                 @csrf
-                <input type="hidden" name="" value="" >
+                <input type="hidden" name="product_id" value="{{$item->id}}" >
                 <button type="submit" class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
@@ -104,14 +114,6 @@
 
 <div id="arrivals" class="grid grid-cols-1 vvs:grid-cols-2 mm:grid-cols-3 lg:grid-cols-4 place-items-center gap-10 w-full  px-6 py-12 pb-6">
 
-    @if(session()->has('message'))
-            <div class="bg-green-100 mt-2 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">{{session()->get('message')}}</span>
-                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close">
-                    <span class="text-green-700 hover:text-green-900">&times;</span>
-                </button>
-            </div>
-    @endif
     <!--each prodcut-->
 
     @foreach ($trending_products as $item)
@@ -135,7 +137,7 @@
                 </button>
             </form>
 
-            <form action="" method="POST" class="bg-transparent w-full ">
+            <form action="{{url('/add_to_cart', $item->id)}}" method="POST" class="bg-transparent w-full ">
                 @csrf
                 <input type="hidden" name="product_id" value="{{$item->id}}" >
                 <button type="submit" class="flex justify-center items-center w-full bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg text-center h-8 rounded-lg hover:from-teal-700 hover:to-teal-500 transition text-white gap-4 font-bold">

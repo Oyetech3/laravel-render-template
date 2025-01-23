@@ -66,7 +66,7 @@
                   <tbody class="bg-white divide-y border-b dark:divide-gray-700 dark:bg-gray-800">
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">{{$products->title}}</td>
-                      <!--<td class="px-4 py-3">{{$products->description}}</td>!-->
+                      <!--<td class="px-4 py-3"></td>!-->
                       <td class="px-4 py-3">{{$products->collection}}</td>
                       <td class="px-4 py-3">₦{{$products->naira_price}}</td>
                       <td class="px-4 py-3">₦{{$products->naira_discount}}</td>
