@@ -22,7 +22,15 @@ class HomeController extends Controller
             $new_products = Product::where('other', '=', 'New Arrival' )->paginate(8);
             $trending_products = Product::where('other', '=' , 'Trending Products')->paginate(8);
 
-            return view('home.userpage', compact('collections','new_products','trending_products'));
+            if(Auth::id()) {
+                $id = Auth::user()->id;
+                $totalcart = carts::where('user_id', '=', $id)->count();
+            } else {
+                $totalcart = 0;
+            }
+
+
+            return view('home.userpage', compact('collections','new_products','trending_products','totalcart'));
         }
     }
     public function index() {
@@ -30,7 +38,15 @@ class HomeController extends Controller
         $new_products = Product::where('other', '=', 'New Arrival' )->paginate(8);
         $trending_products = Product::where('other', '=' , 'Trending Products')->paginate(8);
 
-        return view('home.userpage', compact('collections','new_products','trending_products'));
+        if(Auth::id()) {
+            $id = Auth::user()->id;
+            $totalcart = carts::where('user_id', '=', $id)->count();
+        }
+        else {
+            $totalcart = 0;
+        }
+
+        return view('home.userpage', compact('collections','new_products','trending_products','totalcart'));
     }
 
     public function collections() {
@@ -71,18 +87,18 @@ class HomeController extends Controller
         $carts->title = $products->title;
         $carts->description = $products->description;
         $carts->collection = $products->collection;
-        $carts->naira_price = $products->naira_price;
-        $carts->naira_discount = $products->naira_discount;
+        //$carts->naira_price = $products->naira_price;
+        //$carts->naira_discount = $products->naira_discount;
         $carts->dollar_price = $products->dollar_price;
         $carts->dollar_discount = $products->dollar_discount;
         $carts->image = $products->image;
 
-        /* if($products->naira_discount != null) {
-            $carts->naira_price = $carts->naira_discount * $carts->quantity;
+         if($products->naira_discount != null) {
+            $carts->naira_price = $products->naira_discount;
         }
         else {
-            $carts->naira_price = $carts->naira_price * $carts->quantity;
-        } */
+            $carts->naira_price = $products->naira_price;
+        }
 
         $carts->save();
 
@@ -113,8 +129,9 @@ class HomeController extends Controller
         if(Auth::id()) {
             $id = Auth::user()->id;
             $like = likes::where('user_id', '=', $id)->get();
+            $totalcart = carts::where('user_id', '=', $id)->count();
 
-            return view('home.userlikes', compact('like'));
+            return view('home.userlikes', compact('like','totalcart'));
         }
         else {
             return redirect('login');
@@ -125,8 +142,9 @@ class HomeController extends Controller
         if(Auth::id()) {
             $id = Auth::user()->id;
             $cart = carts::where('user_id', '=', $id)->get();
+            $totalcart = carts::where('user_id', '=', $id)->count();
 
-            return view('home.usercarts', compact('cart'));
+            return view('home.usercarts', compact('cart','totalcart'));
         }
         else {
             return redirect('login');

@@ -41,19 +41,13 @@
 
               @endif
 
-              <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Add Products</h2>
+              <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Update Products</h2>
 
               <form class="" action="{{url('/confirm_edit', $product->id)}}" method="POST"  enctype="multipart/form-data">
                   @csrf
                   <div class="grid gap-1 mb-2">
                       <label>Product Title:</label>
                       <input name="title" value="{{$product->title}}" class="w-1/2 text-sm placeholder:text-gray-400 shadow-md rounded-md border-0" type="text" placeholder="Input product title"  />
-                  </div>
-                  <div class="grid gap-1 mb-2">
-                      <label>Product Description:</label>
-                      <textarea name="description" class="text-sm w-1/2  shadow-md rounded-md border-0 placeholder:text-gray-400" >
-                        {{$product->description}}
-                      </textarea>
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Naira Price:</label>
@@ -95,7 +89,7 @@
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Choose New Image:</label>
-                      <input name="image"  class="w-fit text-sm shadow-sm rounded-md border-0" type="file"  />
+                      <input type="file" name="image"  class="w-fit text-sm shadow-sm rounded-md border-0"  />
                   </div>
 
                   <input class="mt-5 bg-secondary-9 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-700" type="submit" value="Update Collection" />

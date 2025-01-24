@@ -45,6 +45,10 @@
                       </tr>
                     </thead>
 
+                    <?php
+                    $totalprice = 0;
+                    ?>
+
                     @foreach ($cart as $cart)
 
                     <tbody class="bg-white divide-y border-b dark:divide-gray-700 dark:bg-gray-800">
@@ -76,9 +80,31 @@
                         </tr>
                     </tbody>
 
+                    <?php
+                    $totalprice = $totalprice + $cart->naira_price
+                    ?>
+
                     @endforeach
 
                   </table>
+                </div>
+            </div>
+
+            <div class="w-2/5 border place-self-end mt-8 rounded-lg shadow-md">
+                <div class="border-b py-3">
+                    <h2 class="mx-5 text-xl font-semibold text-pink-500">Cart Totals </h2>
+                </div>
+                <div class="border-b text-secondary-9 flex justify-between px-8 py-2 text-lg">
+                    <p>Totals </p>
+                    <p>₦{{$totalprice}}</p>
+                </div>
+                <form class="px-8 py-2" action="{{url('/checkout')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="total" >
+                    <button class="bg-teal-700 text-white text-lg font-semibold w-full p-4 rounded-full" type="submit">Proceed to Checkout</button>
+                </form>
+            </div>
+
         </div>
 
         <!--Newsletter start-->

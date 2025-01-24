@@ -49,10 +49,6 @@
                     <input name="title" class="w-1/2 text-sm placeholder:text-gray-400 shadow-md rounded-md border-0" type="text" placeholder="Input product title" required />
                 </div>
                 <div class="grid gap-1 mb-2">
-                    <label>Product Description:</label>
-                    <textarea name="description" class="text-sm w-1/2 shadow-md rounded-md border-0 placeholder:text-gray-400" placeholder="Write the product desription here" required></textarea>
-                </div>
-                <div class="grid gap-1 mb-2">
                     <label>Naira Price:</label>
                     <input name="naira_price" class="w-1/5 text-sm placeholder:text-gray-400 shadow-md rounded-md border-0" type="text" placeholder="₦" required />
                 </div>

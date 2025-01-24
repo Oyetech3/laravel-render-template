@@ -47,8 +47,13 @@
         <img class="proimg" src="./images/{{$item->image}}" alt="">
         <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#{{$item->naira_price}}</p>
-            <p class="text-pink-600 text-lg">#{{$item->naira_discount}}</p>
+            @empty($item->naira_discount)
+            <p class=" text-pink-600 text-lg">₦{{$item->naira_price}}</p>
+            @else
+            <p class="line-through text-gray-400 text-sm">₦{{$item->naira_price}}</p>
+            <p class="text-pink-600 text-lg">₦{{$item->naira_discount}}</p>
+            @endempty
+
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
 
@@ -122,8 +127,12 @@
         <img class="proimg" src="./images/{{$item->image}}" alt="">
         <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
-            <p class="line-through text-gray-400 text-sm">#{{$item->naira_price}}</p>
-            <p class="text-pink-600 text-lg">#{{$item->naira_discount}}</p>
+            @empty($item->naira_discount)
+            <p class=" text-pink-600 text-lg">₦{{$item->naira_price}}</p>
+            @else
+            <p class="line-through text-gray-400 text-sm">₦{{$item->naira_price}}</p>
+            <p class="text-pink-600 text-lg">₦{{$item->naira_discount}}</p>
+            @endempty
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
 

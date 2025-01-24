@@ -81,7 +81,6 @@ class AdminController extends Controller
         $product = new Product();
 
         $product->title = $request->title;
-        $product->description = $request->description;
         $product->collection = $request->collection;
         $product->naira_price = $request->naira_price;
         $product->naira_discount = $request->naira_discount;
@@ -102,7 +101,7 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->back()->with(
-            'message', "Product had been added successfully"
+            'message', "Product has been added successfully"
         );
     }
 
@@ -131,7 +130,6 @@ class AdminController extends Controller
         $product = Product::find($id);
 
         $product->title = $request->title;
-        $product->description = $request->description;
         $product->collection = $request->collection;
         $product->naira_price = $request->naira_price;
         $product->naira_discount = $request->naira_discount;
@@ -139,9 +137,7 @@ class AdminController extends Controller
         $product->dollar_discount = $request->dollar_discount;
         $product->other = $request->other;
 
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        
 
         $image = $request->file('image');
 
