@@ -50,7 +50,16 @@ class HomeController extends Controller
     }
 
     public function collections() {
-        return view('home.usercollection');
+        $collections = Collection::all();
+
+        if(Auth::id()) {
+            $id = Auth::user()->id;
+            $totalcart = carts::where('user_id', '=', $id)->count();
+        }
+        else {
+            $totalcart = 0;
+        }
+        return view('home.usercollection',compact('collections', 'totalcart'));
     }
 
     public function liked_product(Request $request, $id) {
@@ -107,6 +116,36 @@ class HomeController extends Controller
         );
     }
 
+    public function add_to(Request $request, $id) {
+        $products = likes::find($id);
+        $user = Auth::user();
+        $carts = new carts();
+
+        $carts->user_id = $user->id;
+        $carts->product_id = $request->product_id;
+        $carts->title = $products->title;
+        $carts->description = $products->description;
+        $carts->collection = $products->collection;
+        //$carts->naira_price = $products->naira_price;
+        //$carts->naira_discount = $products->naira_discount;
+        $carts->dollar_price = $products->dollar_price;
+        $carts->dollar_discount = $products->dollar_discount;
+        $carts->image = $products->image;
+
+         if($products->naira_discount != null) {
+            $carts->naira_price = $products->naira_discount;
+        }
+        else {
+            $carts->naira_price = $products->naira_price;
+        }
+
+        $carts->save();
+
+        return redirect()->back()->with(
+            'message', "Product added to carts successfully"
+        );
+    }
+
     public function update_quantity(Request $request, $id) {
         $carts = carts::find($id);
         $carts->quantity = $request->quantity;
@@ -122,6 +161,15 @@ class HomeController extends Controller
 
         return redirect()->back()->with(
             'message', 'Cart removed successfully'
+        );
+    }
+
+    public function delete_like($id) {
+        $like = likes::find($id);
+        $like->delete();
+
+        return redirect()->back()->with(
+            'message', 'Product removed from liked'
         );
     }
 
@@ -156,6 +204,14 @@ class HomeController extends Controller
         $products = Product::paginate(12);
         $collections = Collection::all();
 
-        return view('home.userproducts', compact('products', 'collections'));
+        if(Auth::id()) {
+            $id = Auth::user()->id;
+            $totalcart = carts::where('user_id', '=', $id)->count();
+        }
+        else {
+            $totalcart = 0;
+        }
+
+        return view('home.userproducts', compact('products', 'collections', 'totalcart'));
     }
 }
