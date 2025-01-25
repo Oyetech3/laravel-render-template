@@ -25,12 +25,15 @@ class HomeController extends Controller
             if(Auth::id()) {
                 $id = Auth::user()->id;
                 $totalcart = carts::where('user_id', '=', $id)->count();
+
+                $liked = likes::where('user_id', '=', $id)->pluck('product_id');
             } else {
                 $totalcart = 0;
+                $liked = collect();
             }
 
 
-            return view('home.userpage', compact('collections','new_products','trending_products','totalcart'));
+            return view('home.userpage', compact('collections','new_products','trending_products','totalcart','liked'));
         }
     }
     public function index() {
@@ -41,12 +44,15 @@ class HomeController extends Controller
         if(Auth::id()) {
             $id = Auth::user()->id;
             $totalcart = carts::where('user_id', '=', $id)->count();
+
+            $liked = likes::where('user_id', '=', $id)->pluck('product_id');
         }
         else {
             $totalcart = 0;
+            $liked = collect();
         }
 
-        return view('home.userpage', compact('collections','new_products','trending_products','totalcart'));
+        return view('home.userpage', compact('collections','new_products','trending_products','totalcart','liked'));
     }
 
     public function collections() {
@@ -67,22 +73,27 @@ class HomeController extends Controller
         $user = Auth::user();
         $likes = new likes();
 
-        $likes->user_id = $user->id;
-        $likes->product_id = $request->product_id;
-        $likes->title = $products->title;
-        $likes->description = $products->description;
-        $likes->collection = $products->collection;
-        $likes->naira_price = $products->naira_price;
-        $likes->naira_discount = $products->naira_discount;
-        $likes->dollar_price = $products->dollar_price;
-        $likes->dollar_discount = $products->dollar_discount;
-        $likes->image = $products->image;
+        if(Auth::id()) {
+            $likes->user_id = $user->id;
+            $likes->product_id = $request->product_id;
+            $likes->title = $products->title;
+            $likes->description = $products->description;
+            $likes->collection = $products->collection;
+            $likes->naira_price = $products->naira_price;
+            $likes->naira_discount = $products->naira_discount;
+            $likes->dollar_price = $products->dollar_price;
+            $likes->dollar_discount = $products->dollar_discount;
+            $likes->image = $products->image;
 
-        $likes->save();
+            $likes->save();
 
-        return redirect()->back()->with(
-            'message', "Product saved to liked successfully"
-        );
+            return redirect()->back()->with(
+                'message', "Product saved to liked successfully"
+            );
+        }
+        else {
+            return redirect('login');
+        }
 
     }
 
@@ -91,29 +102,36 @@ class HomeController extends Controller
         $user = Auth::user();
         $carts = new carts();
 
-        $carts->user_id = $user->id;
-        $carts->product_id = $request->product_id;
-        $carts->title = $products->title;
-        $carts->description = $products->description;
-        $carts->collection = $products->collection;
-        //$carts->naira_price = $products->naira_price;
-        //$carts->naira_discount = $products->naira_discount;
-        $carts->dollar_price = $products->dollar_price;
-        $carts->dollar_discount = $products->dollar_discount;
-        $carts->image = $products->image;
+        if(Auth::id()) {
+            $carts->user_id = $user->id;
+            $carts->product_id = $request->product_id;
+            $carts->title = $products->title;
+            $carts->description = $products->description;
+            $carts->collection = $products->collection;
+            //$carts->naira_price = $products->naira_price;
+            //$carts->naira_discount = $products->naira_discount;
+            $carts->dollar_price = $products->dollar_price;
+            $carts->dollar_discount = $products->dollar_discount;
+            $carts->image = $products->image;
 
-         if($products->naira_discount != null) {
-            $carts->naira_price = $products->naira_discount;
+            if($products->naira_discount != null) {
+                $carts->naira_price = $products->naira_discount;
+            }
+            else {
+                $carts->naira_price = $products->naira_price;
+            }
+
+            $carts->save();
+
+            return redirect()->back()->with(
+                'message', "Product added to carts successfully"
+            );
         }
         else {
-            $carts->naira_price = $products->naira_price;
+            return redirect('login');
         }
 
-        $carts->save();
 
-        return redirect()->back()->with(
-            'message', "Product added to carts successfully"
-        );
     }
 
     public function add_to(Request $request, $id) {
@@ -173,6 +191,17 @@ class HomeController extends Controller
         );
     }
 
+    public function delete($id) {
+        $like = likes::where('user_id', Auth::id())->where('product_id', $id)->first();
+
+        if ($like) {
+            $like->delete();
+            return redirect()->back()->with('message', 'Product removed from liked.');
+        }
+
+        return redirect()->back()->with('error', 'Like not found.');
+    }
+
     public function liked() {
         if(Auth::id()) {
             $id = Auth::user()->id;
@@ -207,11 +236,14 @@ class HomeController extends Controller
         if(Auth::id()) {
             $id = Auth::user()->id;
             $totalcart = carts::where('user_id', '=', $id)->count();
+
+            $liked = likes::where('user_id', '=', $id)->pluck('product_id');
         }
         else {
             $totalcart = 0;
+            $liked = collect();
         }
 
-        return view('home.userproducts', compact('products', 'collections', 'totalcart'));
+        return view('home.userproducts', compact('products', 'collections', 'totalcart', 'liked'));
     }
 }

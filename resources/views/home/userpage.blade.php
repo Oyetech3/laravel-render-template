@@ -23,6 +23,15 @@
 
         <!--header end-->
 
+        @if(session()->has('message'))
+            <div class="bg-green-100 mt-2 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{session()->get('message')}}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close">
+                    <span class="text-green-700 hover:text-green-900">&times;</span>
+                </button>
+            </div>
+         @endif
+
         <!--slider info-->
         @include('home.slider')
         <!--slider info-->

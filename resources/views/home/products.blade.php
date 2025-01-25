@@ -1,12 +1,3 @@
-@if(session()->has('message'))
-            <div class="bg-green-100 mt-2 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">{{session()->get('message')}}</span>
-                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close">
-                    <span class="text-green-700 hover:text-green-900">&times;</span>
-                </button>
-            </div>
-    @endif
-
 <div class="my-10 ">
     <!--Categories-->
     <div class="relative inline-block ss:hidden mx-2 sss:mx-5">
@@ -57,6 +48,19 @@
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
 
+            @if ($liked->contains($item->id))
+            <form action="{{url('/delete', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 fill-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </button>
+            </form>
+
+            @else
             <form action="{{url('/liked_product', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $item->id }}">
@@ -66,6 +70,8 @@
                     </svg>
                 </button>
             </form>
+            @endif
+
 
             <form action="{{url('/add_to_cart', $item->id)}}" method="POST" class="bg-transparent w-full ">
                 @csrf
@@ -136,6 +142,19 @@
         </div>
         <div class="flex gap-2 py-2 px-1.5 justify-between items-center w-full bg-gray-50 rounded-lg">
 
+            @if ($liked->contains($item->id))
+            <form action="{{url('/delete', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 fill-secondary-9 hover:fill-secondary-9 transition transform hover:scale-110">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </button>
+            </form>
+
+            @else
             <form action="{{url('/liked_product', $item->id)}}" method="POST" enctype="multipart/form-data" class="w-10 bg-transparent">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $item->id }}">
@@ -145,6 +164,8 @@
                     </svg>
                 </button>
             </form>
+            @endif
+
 
             <form action="{{url('/add_to_cart', $item->id)}}" method="POST" class="bg-transparent w-full ">
                 @csrf
