@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,29 @@ route::post('/update_quantity/{id}', [HomeController::class, 'update_quantity'])
 route::get('/delete_cart/{id}', [HomeController::class, 'delete_cart']);
 route::get('/delete_like/{id}', [HomeController::class, 'delete_like']);
 route::delete('/delete/{id}', [HomeController::class, 'delete']);
+route::get('/services', [HomeController::class, 'services']);
+route::get('/contact', [HomeController::class, 'contact']);
+
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Contact Management
+    Route::get('/contacts', [ContactController::class, 'adminIndex'])->name('contacts.index');
+    Route::get('/contacts/{contact}', [ContactController::class, 'adminShow'])->name('contacts.show');
+    Route::patch('/contacts/{contact}', [ContactController::class, 'adminUpdate'])->name('contacts.update');
+
+    // Newsletter Management
+    Route::get('/newsletter', [NewsletterController::class, 'adminIndex'])->name('newsletter.index');
+    Route::get('/newsletter/export', [NewsletterController::class, 'export'])->name('newsletter.export');
+    Route::post('/newsletter/send', [NewsletterController::class, 'adminSend'])->name('newsletter.send');
+
+});
+
+
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+Route::post('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'processUnsubscribe'])->name('newsletter.unsubscribe.process');
 
 
 route::get('/admindashboard', [AdminController::class, 'admindashboard']);

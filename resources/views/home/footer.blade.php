@@ -24,24 +24,25 @@
 
     <div class="text-secondary-9 pt-6 md:pt-8">
         <h3 class="font-bold text-lg md:text-xl text-pink-600 uppercase">Account</h3>
-        <div class="py-3">
-            <p>Login</p>
-            <p>Register</p>
-            <p>Dashboard</p>
-            <p>Liked</p>
+        <div class="py-3 flex flex-col">
+            <a href="{{route('login')}}">Login</a>
+            <a href="{{route('register')}}">Register</a>
+            <a href="{{url('carts')}}">Carts</a>
+            <a href="{{url('liked')}}">Liked</a>
         </div>
     </div>
 
-    <div class="text-secondary-9 pt-5 md:pt-8">
+    <form action="{{route('newsletter.subscribe')}}" method="POST" class="text-secondary-9 pt-5 md:pt-8">
+        @csrf
         <h3 class="font-bold text-lg md:text-xl text-pink-600 uppercase">NEWSLETTER</h3>
         <p class="py-3">Subscribe by our newsletter and get update infos.</p>
         <div class="flex flex-col sss:flex-row pb-10 justify-center md:justify-normal">
-            <input class="h-12 px-4" type="text" placeholder="Enter Your Mail">
-            <a class="bg-secondary-9 p-3 text-center" href="">
+            <input name="email" class="h-12 px-4" type="text" placeholder="Enter Your Mail" required>
+            <button type="submit" class="bg-secondary-9 p-3 text-center" >
                 <p class="text-white font-semibold">Subscribe</p>
-            </a>
+            </button>
         </div>
-    </div>
+    </form>
 </section>
 <div class="bg-secondary-9 text-white py-2 text-center">
     <p>&copy;2025 MutmineBeads All Rights Reserved</p>

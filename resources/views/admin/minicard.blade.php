@@ -21,7 +21,7 @@
         <p
           class="text-lg font-semibold text-gray-700 dark:text-gray-200"
         >
-          6389
+          0
         </p>
       </div>
     </div>
@@ -49,7 +49,7 @@
         <p
           class="text-lg font-semibold text-gray-700 dark:text-gray-200"
         >
-          $ 46,760.89
+          $ 0
         </p>
       </div>
     </div>
@@ -75,7 +75,7 @@
         <p
           class="text-lg font-semibold text-gray-700 dark:text-gray-200"
         >
-          376
+          0
         </p>
       </div>
     </div>
@@ -103,7 +103,7 @@
         <p
           class="text-lg font-semibold text-gray-700 dark:text-gray-200"
         >
-          35
+          0
         </p>
       </div>
     </div>

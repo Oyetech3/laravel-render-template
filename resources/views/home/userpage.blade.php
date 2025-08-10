@@ -36,6 +36,8 @@
         @include('home.slider')
         <!--slider info-->
 
+        <!--Why Section !-->
+        @include('home.why')
 
         <!--New Arrivals-->
         @include('home.products')

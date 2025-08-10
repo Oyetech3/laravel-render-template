@@ -1,4 +1,4 @@
-<div class="flex gap-7 justify-center  w-full h-10 px-5 py-1">
+<div class="flex gap-7 justify-center  w-full h-10 mt-3 px-5 py-1">
     <!--select category-->
 
      <div class="hidden relative ss:inline-block ">
@@ -21,7 +21,7 @@
            @foreach ($collections as $item)
            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">{{$item->collection_name}}</li>
            @endforeach
-           
+
          </ul>
 
     </div>

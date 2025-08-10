@@ -246,4 +246,35 @@ class HomeController extends Controller
 
         return view('home.userproducts', compact('products', 'collections', 'totalcart', 'liked'));
     }
+
+    public function services() {
+
+        if(Auth::id()) {
+            $id = Auth::user()->id;
+            $totalcart = carts::where('user_id', '=', $id);
+            $liked = likes::where('user_id', '=', $id)->pluck('product_id');
+
+        }
+        else {
+            $totalcart = 0;
+            $liked = collect();
+        }
+
+        return view('home.services', compact('totalcart', 'liked'));
+    }
+
+    public function contact() {
+        if(Auth::id()) {
+            $id = Auth::user()->id;
+            $totalcart = carts::where('user_id', '=', $id);
+            $liked = likes::where('user_id', '=', $id)->pluck('product_id');
+
+        }
+        else {
+            $totalcart = 0;
+            $liked = collect();
+        }
+
+        return view('home.contact', compact('totalcart', 'liked'));
+    }
 }

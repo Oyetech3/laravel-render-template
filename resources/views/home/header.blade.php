@@ -1,4 +1,4 @@
-<div class="flex sticky top-0 z-30 items-center justify-between bg-white w-full h-16 px-1 vs:px-5 py-1">
+<div class="flex sticky top-0 z-30 shadow-sm items-center justify-between bg-white w-full h-16 px-1 vs:px-5 py-1">
     <!--Logo-->
     <a href="{{url('/')}}" id="logo" class="flex items-center cursor-pointer ">
         <img class="size-8 sss:size-12 vs:size-16" src="./images/logomut.png" alt="">
@@ -15,8 +15,8 @@
             <ul class="flex w-mini flex-col py-5 px-10 gap-5 mm:flex-row mm:px-0 mm:justify-between ">
                 <li class="links"><a href="{{url('/')}}">Home</a></li>
                 <li class="links"><a href="{{url('/products')}}">Products</a></li>
-                <li class="links"><a href="">Services</a></li>
-                <li class="links"><a href="">Contact</a></li>
+                <li class="links"><a href="{{url('/services')}}">Services</a></li>
+                <li class="links"><a href="{{url('/contact')}}">Contact</a></li>
             </ul>
         </nav>
     </div>
