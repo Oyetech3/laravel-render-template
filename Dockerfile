@@ -1,13 +1,17 @@
 FROM richarvey/nginx-php-fpm:latest
 
-# Install Node.js
-RUN apt-get update && apt-get install -y curl
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+# Install Node.js (Alpine Linux uses 'apk' instead of 'apt-get')
+RUN apk update && apk add --no-cache \
+    curl \
+    nodejs \
+    npm
+
+# Install Yarn (optional)
+RUN npm install -g yarn
 
 COPY . .
 
-# Image config
+# Image config (keep existing)
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
@@ -21,5 +25,8 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Build frontend assets (if needed)
+RUN npm install && npm run build
 
 CMD ["/start.sh"]
