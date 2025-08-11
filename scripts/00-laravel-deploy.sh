@@ -11,6 +11,9 @@ npm run build --prefix /var/www/html
 echo "Checking build output..."
 ls -la /var/www/html/public/build/
 
+echo "Checking manifest content..."
+cat /var/www/html/public/build/manifest.json
+
 echo "Caching config..."
 php artisan config:cache
 
