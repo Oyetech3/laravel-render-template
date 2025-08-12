@@ -256,7 +256,7 @@ class HomeController extends Controller
 
         if(Auth::id()) {
             $id = Auth::user()->id;
-            $totalcart = carts::where('user_id', '=', $id);
+            $totalcart = carts::where('user_id', '=', $id)->count();
             $liked = likes::where('user_id', '=', $id)->pluck('product_id');
 
             Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
@@ -274,7 +274,7 @@ class HomeController extends Controller
     public function contact() {
         if(Auth::id()) {
             $id = Auth::user()->id;
-            $totalcart = carts::where('user_id', '=', $id);
+            $totalcart = carts::where('user_id', '=', $id)->count();
             $liked = likes::where('user_id', '=', $id)->pluck('product_id');
 
             Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
