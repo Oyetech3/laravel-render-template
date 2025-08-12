@@ -8,6 +8,7 @@ use App\Models\likes;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -208,6 +209,8 @@ class HomeController extends Controller
             $like = likes::where('user_id', '=', $id)->get();
             $totalcart = carts::where('user_id', '=', $id)->count();
 
+            Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
+
             return view('home.userlikes', compact('like','totalcart'));
         }
         else {
@@ -220,6 +223,8 @@ class HomeController extends Controller
             $id = Auth::user()->id;
             $cart = carts::where('user_id', '=', $id)->get();
             $totalcart = carts::where('user_id', '=', $id)->count();
+
+            Log::info('Memory after heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
 
             return view('home.usercarts', compact('cart','totalcart'));
         }
@@ -254,8 +259,11 @@ class HomeController extends Controller
             $totalcart = carts::where('user_id', '=', $id);
             $liked = likes::where('user_id', '=', $id)->pluck('product_id');
 
+            Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
+
         }
         else {
+            Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
             $totalcart = 0;
             $liked = collect();
         }
@@ -269,10 +277,14 @@ class HomeController extends Controller
             $totalcart = carts::where('user_id', '=', $id);
             $liked = likes::where('user_id', '=', $id)->pluck('product_id');
 
+            Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
+
         }
         else {
             $totalcart = 0;
             $liked = collect();
+
+            Log::info('Memory before heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
         }
 
         return view('home.contact', compact('totalcart', 'liked'));
