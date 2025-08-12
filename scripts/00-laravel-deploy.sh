@@ -14,6 +14,10 @@ ls -la /var/www/html/public/build/
 echo "Checking manifest content..."
 cat /var/www/html/public/build/manifest.json
 
+echo "Clearing and caching config..."
+php artisan config:clear
+php artisan config:cache
+
 echo "Caching config..."
 php artisan config:cache
 
