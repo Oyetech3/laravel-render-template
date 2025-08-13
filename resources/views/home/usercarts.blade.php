@@ -69,7 +69,9 @@
                                 </button>
                             </form>
                           </td>
-                          <td class="px-4 py-2">₦{{$cart->naira_price * $cart->quantity}}</td>
+                          <td class="px-4 py-2">
+                            ₦{{ number_format((float) str_replace(',', '', $cart->naira_price) * (int) $cart->quantity) }}
+                          </td>
                           <td class="px-4 py-2">
                             <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_cart', $cart->id)}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -81,7 +83,8 @@
                     </tbody>
 
                     <?php
-                    $totalprice = $totalprice + $cart->naira_price
+                    $cleanPrice = (float) str_replace(',', '', $cart->naira_price);
+                    $totalprice = $totalprice + ($cleanPrice * $cart->quantity);
                     ?>
 
                     @endforeach

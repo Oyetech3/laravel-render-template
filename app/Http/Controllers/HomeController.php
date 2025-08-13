@@ -223,15 +223,12 @@ class HomeController extends Controller
             $id = Auth::user()->id;
             $cart = carts::where('user_id', '=', $id)->get();
             $totalcart = carts::where('user_id', '=', $id)->count();
-
             Log::info('Memory after heavy operation: ' . round(memory_get_usage() / 1024 / 1024, 2) . ' MB');
-
             return view('home.usercarts', compact('cart','totalcart'));
         }
         else {
             return redirect('login');
         }
-
     }
 
     public function products() {
