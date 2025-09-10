@@ -8,7 +8,7 @@
         <div class="flex gap-5">
             <a href="">
                 <div class="coll">
-                    <img class="w-full h-full  rounded-lg" src="./images/{{$item->imageone}}" >
+                    <img class="w-full h-full  rounded-lg" src="{{ asset('storage/images/' . $item->imageone) }}" >
                     <div class="absolute top-2/4  mt-10 py-6 px-6">
                         <p class="font-bold text-black text-xl leading-relaxed" style="-webkit-text-stroke: 1px white;">{{$item->collection_name}}</p>
                         <a href="" class="block text-center bg-gradient-to-r mt-2 from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 rounded-md py-1.5 px-4 transform transition-all duration-300 hover:scale-105 shadow-lg">
@@ -19,10 +19,10 @@
             </a>
             <div class="colldiv">
                 <div class="collone">
-                    <img src="./images/{{$item->imagetwo}}" class="h-full w-full rounded-lg" >
+                    <img src="{{ asset('storage/images/' . $item->imagetwo) }}" class="h-full w-full rounded-lg" >
                 </div>
                 <div class="colltwo ">
-                    <img src="./images/{{$item->imagethree}}" class="h-full w-full rounded-lg" >
+                    <img src="{{ asset('storage/images/' . $item->imagethree) }}" class="h-full w-full rounded-lg" >
                 </div>
             </div>
         </div>

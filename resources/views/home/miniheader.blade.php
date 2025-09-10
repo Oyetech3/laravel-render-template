@@ -28,15 +28,15 @@
     <!--select category end-->
 
     <!--Search -->
-    <div class="flex p-0.5 rounded justify-between border-2 border-pink-500 w-ninety ss:w-1/2">
-     <input class="w-full px-2 bg-transparent text-sm vs:text-lg border-0 outline-0 focus-within:border-0" type="text" placeholder="Search Products" >
-     <button class="bg-pink-500 px-2 w-9  rounded">
-         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5 stroke-white">
-             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-         </svg>
+    <form method="GET" action="" class="flex p-0.5 rounded justify-between border-2 border-pink-500 w-ninety ss:w-1/2">
+        <input class="w-full px-2 bg-transparent text-sm vs:text-lg border-0 outline-0 focus-within:border-0" name="search" type="text" value="{{ request('search') }}" placeholder="Search Products" >
+        <button type="submit" class="bg-pink-500 px-2 w-9  rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5 stroke-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
 
-     </button>
-    </div>
+        </button>
+    </form>
     <!--Search end-->
 
  </div>

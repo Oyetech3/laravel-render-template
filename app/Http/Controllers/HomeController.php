@@ -13,15 +13,23 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
     //
-    public function redirect() {
+    public function redirect(Request $request) {
         $usertype = Auth::user()->usertype;
         if($usertype == 1) {
             return view('admin.index');
         }
         else {
             $collections = Collection::all();
-            $new_products = Product::where('other', '=', 'New Arrival' )->paginate(8);
-            $trending_products = Product::where('other', '=' , 'Trending Products')->paginate(8);
+            $new_products = Product::where('other', '=', 'New Arrival' )
+            ->when($request->search, function($query) use($request) {
+                return $query->whereAny([
+                    'title',
+                    'collection'
+                ], 'like', '%' . $request->search . '%');
+            })
+            ->paginate(8);
+            $trending_products = Product::where('other', '=' , 'Trending Products')
+            ->paginate(8);
 
             if(Auth::id()) {
                 $id = Auth::user()->id;
@@ -231,8 +239,13 @@ class HomeController extends Controller
         }
     }
 
-    public function products() {
-        $products = Product::paginate(12);
+    public function products(Request $request) {
+        $products = Product::when($request->search, function($query) use($request) {
+            return $query->whereAny([
+                'title',
+                'collection'
+            ], 'like', '%' . $request->search . '%');
+        })->paginate(12);
         $collections = Collection::all();
 
         if(Auth::id()) {

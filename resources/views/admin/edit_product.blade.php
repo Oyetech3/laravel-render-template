@@ -85,14 +85,14 @@
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Current Image:</label>
-                      <img class="size-24 rounded-md" src="/images/{{$product->image}}" />
+                      <img class="size-24 rounded-md" src="{{ asset('storage/images/' . $product->image) }}" />
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Choose New Image:</label>
                       <input type="file" name="image"  class="w-fit text-sm shadow-sm rounded-md border-0"  />
                   </div>
 
-                  <input class="mt-5 bg-secondary-9 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-700" type="submit" value="Update Collection" />
+                  <input class="mt-5 bg-secondary-9 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-700" type="submit" value="Update Product" />
               </form>
             </div>
 

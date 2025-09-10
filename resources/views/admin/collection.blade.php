@@ -70,7 +70,7 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">{{$collections->collection_name}}</td>
                       <td class="px-4 py-3">
-                        <img class="size-24 rounded-lg shadow-md" src="/images/{{$collections->imageone}}" />
+                        <img class="size-24 rounded-lg shadow-md" src="{{ asset('storage/images/' . $collections->imageone) }}" />
                       </td>
                       <td class="px-4 py-3">
                         <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_collection', $collections->id)}}" class="bg-secondary-9 hover:bg-gray-700 text-white rounded-md px-3.5 py-2">Delete</a>

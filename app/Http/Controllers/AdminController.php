@@ -39,24 +39,48 @@ class AdminController extends Controller
             $collection = new Collection();
             $collection->collection_name = $request->collection_name;
 
+            if ($request->hasFile('image1')) {
+                $image = $request->file('image1');
+                $imageone = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                $path = $image->storeAs('images', $imageone, 'public');
+                $collection->imageone = $imageone;
+            }
+
+            if ($request->hasFile('image2')) {
+                $image = $request->file('image2');
+                $imagetwo = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                $path = $image->storeAs('images', $imagetwo, 'public');
+                $collection->imagetwo = $imagetwo;
+            }
+
+            if ($request->hasFile('image3')) {
+                $image = $request->file('image3');
+                $imagethree = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                $path = $image->storeAs('images', $imagethree, 'public');
+                $collection->imagethree = $imagethree;
+            }
+
             // Process image uploads
-            $imageone = $request->file('image1');
-            $imagetwo = $request->file('image2');
-            $imagethree = $request->file('image3');
+            // $imageone = $request->file('image1');
+            // $imagetwo = $request->file('image2');
+            // $imagethree = $request->file('image3');
 
-            $imagename1 = time() . '_1.' . $imageone->getClientOriginalExtension();
-            $imagename2 = time() . '_2.' . $imagetwo->getClientOriginalExtension();
-            $imagename3 = time() . '_3.' . $imagethree->getClientOriginalExtension();
+            // $imagename1 = time() . '_1.' . $imageone->getClientOriginalExtension();
+            // $imagename2 = time() . '_2.' . $imagetwo->getClientOriginalExtension();
+            // $imagename3 = time() . '_3.' . $imagethree->getClientOriginalExtension();
 
-            // Save images in the public 'images' directory
-            $imageone->move(public_path('images'), $imagename1);
-            $imagetwo->move(public_path('images'), $imagename2);
-            $imagethree->move(public_path('images'), $imagename3);
+            // // Save images in the public 'images' directory
+            // $imageone->move(public_path('images'), $imagename1);
+            // $imagetwo->move(public_path('images'), $imagename2);
+            // $imagethree->move(public_path('images'), $imagename3);
 
-            // Save image names in the database
-            $collection->imageone = $imagename1;
-            $collection->imagetwo = $imagename2;
-            $collection->imagethree = $imagename3;
+            // // Save image names in the database
+            // $collection->imageone = $imagename1;
+            // $collection->imagetwo = $imagename2;
+            // $collection->imagethree = $imagename3;
 
             $collection->save();
 
@@ -78,6 +102,11 @@ class AdminController extends Controller
     }
 
     public function add_product(Request $request) {
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $product = new Product();
 
         $product->title = $request->title;
@@ -88,15 +117,14 @@ class AdminController extends Controller
         $product->dollar_discount = $request->dollar_discount;
         $product->other = $request->other;
 
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
 
-        $image = $request->file('image');
-        $imagename = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imagename);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
 
-        $product->image = $imagename;
+            $path = $image->storeAs('images', $imagename, 'public');
+            $product->image = $imagename;
+        }
 
         $product->save();
 
@@ -136,14 +164,12 @@ class AdminController extends Controller
         $product->dollar_price = $request->dollar_price;
         $product->dollar_discount = $request->dollar_discount;
         $product->other = $request->other;
-
         
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
 
-        $image = $request->file('image');
-
-        if($image) {
-            $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imagename);
+            $path = $image->storeAs('images', $imagename, 'public');
             $product->image = $imagename;
         }
 
