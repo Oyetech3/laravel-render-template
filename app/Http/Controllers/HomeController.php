@@ -6,6 +6,8 @@ use App\Models\carts;
 use App\Models\Collection;
 use App\Models\likes;
 use App\Models\Product;
+use Cloudinary\Cloudinary;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -92,7 +94,34 @@ class HomeController extends Controller
             $likes->naira_discount = $products->naira_discount;
             $likes->dollar_price = $products->dollar_price;
             $likes->dollar_discount = $products->dollar_discount;
-            $likes->image = $products->image;
+
+            try {
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => config('services.cloudinary.cloud_name'),
+                        'api_key' => config('services.cloudinary.api_key'),
+                        'api_secret' => config('services.cloudinary.api_secret'),
+                    ]
+                ]);
+
+                $uploadedFile = $products->image;
+                $result = $cloudinary->uploadApi()->upload($uploadedFile->getRealPath(), [
+                    'folder' => 'mutmine_beads',
+                    'public_id' => 'product_' . time() . '_' . uniqid(),
+                    'transformation' => [
+                        'width' => 800,
+                        'height' => 800,
+                        'crop' => 'fill',
+                        'quality' => 'auto'
+                    ]
+                ]);
+
+                $likes->image = $result['public_id'];
+
+            }
+            catch (Exception $e) {
+                return redirect()->back()->withErrors(['image' => 'Failed to upload image. Please try again.']);
+            }
 
             $likes->save();
 
@@ -121,13 +150,40 @@ class HomeController extends Controller
             //$carts->naira_discount = $products->naira_discount;
             $carts->dollar_price = $products->dollar_price;
             $carts->dollar_discount = $products->dollar_discount;
-            $carts->image = $products->image;
 
             if($products->naira_discount != null) {
                 $carts->naira_price = $products->naira_discount;
             }
             else {
                 $carts->naira_price = $products->naira_price;
+            }
+
+            try {
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => config('services.cloudinary.cloud_name'),
+                        'api_key' => config('services.cloudinary.api_key'),
+                        'api_secret' => config('services.cloudinary.api_secret'),
+                    ]
+                ]);
+
+                $uploadedFile = $products->image;
+                $result = $cloudinary->uploadApi()->upload($uploadedFile->getRealPath(), [
+                    'folder' => 'mutmine_beads',
+                    'public_id' => 'product_' . time() . '_' . uniqid(),
+                    'transformation' => [
+                        'width' => 800,
+                        'height' => 800,
+                        'crop' => 'fill',
+                        'quality' => 'auto'
+                    ]
+                ]);
+
+                $carts->image = $result['public_id'];
+
+            }
+            catch (Exception $e) {
+                return redirect()->back()->withErrors(['image' => 'Failed to upload image. Please try again.']);
             }
 
             $carts->save();

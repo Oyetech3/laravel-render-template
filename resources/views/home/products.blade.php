@@ -35,7 +35,9 @@
     @foreach ($new_products as $item)
 
     <a class="proanchor" href="">
-        <img class="proimg" src="{{ asset('storage/images/' . $item->image) }}" alt="">
+        <img class="proimg" src="{{ $item->image_url }}" alt="{{ $item->title }}"
+        loading="lazy"
+        onerror="this.src='{{ asset('images/mut.png') }}'; this.onerror=null;">
         <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
             @empty($item->naira_discount)
@@ -130,7 +132,9 @@
     @foreach ($trending_products as $item)
 
     <a class="proanchor" href="">
-        <img class="proimg" src="{{ asset('storage/images/' . $item->image) }}" alt="">
+        <img class="proimg" src="{{ $item->image_url }}" alt="{{ $item->title }}"
+        loading="lazy"
+        onerror="this.src='{{ asset('images/mut.png') }}'; this.onerror=null;">
         <p class="pt-2 text-lg px-1.5 bg-gray-50 rounded-lg leading-6 text-secondary-9 font-semibold">{{$item->title}}</p>
         <div class="flex justify-between items-center font-semibold px-1.5 bg-gray-50 rounded-lg">
             @empty($item->naira_discount)

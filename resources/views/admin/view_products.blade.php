@@ -73,7 +73,7 @@
                       <td class="px-4 py-3">${{$products->dollar_price}}</td>
                       <td class="px-4 py-3">${{$products->dollar_discount}}</td>
                       <td class="px-4 py-3">
-                        <img class="size-16 rounded-lg shadow-md" src="{{ asset('storage/images/' . $products->image) }}" />
+                        <img class="size-16 rounded-lg shadow-md" src="{{ $products->image_url }}" />
                       </td>
                       <td class="px-4 py-3">
                         <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_product', $products->id)}}" class="bg-secondary-9 hover:bg-gray-700 text-white rounded-md px-3.5 py-2">Delete</a>

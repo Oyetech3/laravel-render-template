@@ -54,7 +54,7 @@
                     <tbody class="bg-white divide-y border-b dark:divide-gray-700 dark:bg-gray-800">
                         <tr class="text-gray-700 dark:text-gray-400">
                           <td class="px-4 py-2">
-                            <img class="size-20 rounded-lg shadow-md" src="{{ asset('storage/images/' . $cart->image) }}" />
+                            <img class="size-20 rounded-lg shadow-md" src="{{ $cart->image_url }}" />
                           </td>
                           <td class="px-4 py-2">{{$cart->title}}</td>
                           <td class="px-4 py-2">₦{{$cart->naira_price}}</td>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="w-2/5 border place-self-end mt-8 rounded-lg shadow-md">
+            <div class="lg:w-2/5 border mx-4 lg:place-self-end mt-8 rounded-lg shadow-md">
                 <div class="border-b py-3">
                     <h2 class="mx-5 text-xl font-semibold text-pink-500">Cart Totals </h2>
                 </div>

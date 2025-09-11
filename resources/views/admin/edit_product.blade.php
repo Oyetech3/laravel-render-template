@@ -85,7 +85,7 @@
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Current Image:</label>
-                      <img class="size-24 rounded-md" src="{{ asset('storage/images/' . $product->image) }}" />
+                      <img class="size-24 rounded-md" src="{{ $product->image_url }}" />
                   </div>
                   <div class="grid gap-1 mb-2">
                       <label>Choose New Image:</label>

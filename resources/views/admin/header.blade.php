@@ -156,9 +156,12 @@
           </template>
         </li>
         <!-- Profile menu -->
-        <li class="relative">
+        @auth
+
             @include('home.navmenu')
-        </li>
+       
+        @endauth
+
       </ul>
     </div>
   </header>

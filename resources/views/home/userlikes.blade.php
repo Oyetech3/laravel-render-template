@@ -51,7 +51,7 @@
                         <tr class="text-gray-700 dark:text-gray-400">
                           <td class="px-4 py-2">
                             <a href="">
-                              <img class="size-20 rounded-lg shadow-md" src="{{ asset('storage/images/' . $like->image) }}" />
+                              <img class="size-20 rounded-lg shadow-md" src="{{ $like->image_url }}" />
                             </a>
                           </td>
                           <td class="px-4 py-2">{{$like->title}}</td>
